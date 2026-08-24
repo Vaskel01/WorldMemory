@@ -1,0 +1,11 @@
+WorldMemory 0.1.0-alpha.50 — Narrative Session Manager & Composition
+
+- Cross-file dialogue imports with aliases.
+- Imported node/choice edge rewriting.
+- Imported alpha.49 flow metadata composition.
+- Priority-aware dialogue queue.
+- Safe pause/resume of interruptible dialogue sessions.
+- Original story callbacks remain attached to resumed sessions.
+- Session watchdog clears stale state after hard cancellation.
+- Optional nearby audience transcript mirroring.
+- /conversation session, queue, participants, clear.

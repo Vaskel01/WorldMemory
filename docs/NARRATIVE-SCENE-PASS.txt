@@ -1,0 +1,15 @@
+WorldMemory 0.1.0-alpha.51 — Multi-Character Scene Direction
+
+Adds a staged-scene layer above dialogue and cutscenes:
+- /scene authoring, validation, inspection and runtime diagnostics
+- scene cast aliases and nearby multiplayer audiences
+- NPC-to-NPC / actor-to-actor line beats
+- blocking actor enter/move/exit/look actions
+- synchronized participant camera enter/move/exit beats
+- blocking dialogue and animation steps
+- title/sound/command/wait scene actions
+- story/cutscene integration through type: directed-scene
+- automatic camera cleanup on completion, cancellation, failure and shutdown
+
+The scene runtime composes existing NarrativeCore, NarrativeSessions,
+NarrativeActors and NarrativeDirector systems instead of replacing them.

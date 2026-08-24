@@ -1,0 +1,15 @@
+id: collector.remnants_peaceful
+trigger: npc_interaction
+target: pale_basin.ash_collector
+priority: 30
+conditions:
+  memory-tier:
+    mercy: high
+  action-count:
+    remnant_comforted:
+      minimum: 3
+effects:
+  - dialogue: collector.remnants_peaceful
+repeat:
+  once: false
+  cooldown: 30m

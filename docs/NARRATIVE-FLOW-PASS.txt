@@ -1,0 +1,14 @@
+WorldMemory 0.1.0-alpha.49 - Dialogue Graph & Conversation Flow
+
+Adds:
+- Local reusable dialogue subgraphs using flow.call / flow.return.
+- Weighted node routing using flow.variants.
+- Persistent per-player node visits, once-only nodes and cooldowns.
+- conversation-condition / flow-condition predicates in existing when: blocks.
+- Conversation state interpolation tokens.
+- Ambient actor barks with priority, chance, once/cooldown gates; never interrupt active dialogue.
+- /conversation list|graph|trace|validate|reload|bark|reset.
+- Graph reachability inspection and flow-reference validation.
+
+Architecture:
+NarrativeCore calls NarrativeBridge, which delegates all alpha.48 NarrativeActors behavior and the new NarrativeFlow behavior. NarrativeCore's public format remains compatible.

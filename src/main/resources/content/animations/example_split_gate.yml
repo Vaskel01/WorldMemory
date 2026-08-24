@@ -1,0 +1,82 @@
+# WorldMemory Animation Core - Tribunal split gate example (alpha.28)
+# Fill in the real left/right gate cuboids and the exact center interaction block.
+
+id: pale_basin.tribunal_gate
+enabled: false
+world: ""
+
+state:
+  initial: zero
+
+targets:
+  left_half:
+    type: cuboid
+    min: { x: 0, y: 0, z: 0 }
+    max: { x: 0, y: 0, z: 0 }
+    ignore-air: true
+
+    # Add a material mask if permanent wall blocks share this selection.
+    include-materials: []
+
+  right_half:
+    type: cuboid
+    min: { x: 0, y: 0, z: 0 }
+    max: { x: 0, y: 0, z: 0 }
+    ignore-air: true
+    include-materials: []
+
+triggers:
+  center_seal:
+    type: right_click
+    location: { x: 0, y: 0, z: 0 }
+    animation: open
+    cancel-vanilla: true
+
+    # Good for a boss-key door: once it opens, repeated clicks do nothing.
+    # Persistent key/story state can be wired in later.
+    one-shot: true
+
+animations:
+  open:
+    steps:
+      - type: sound
+        target: left_half
+        sound: minecraft:block.vault.activate
+        volume: 1.0
+        pitch: 0.70
+
+      - type: wait
+        ticks: 6
+
+      - type: parallel
+        steps:
+          - type: translate
+            target: left_half
+            offset: { x: -4, y: 0, z: 0 }
+            duration-ticks: 45
+            easing: ease_in_out
+            renderer: block_display
+            prevent-collision: true
+            apply-physics: false
+            hide-at-end: true
+
+          - type: translate
+            target: right_half
+            offset: { x: 4, y: 0, z: 0 }
+            duration-ticks: 45
+            easing: ease_in_out
+            renderer: block_display
+            prevent-collision: true
+            apply-physics: false
+            hide-at-end: true
+
+      - type: sound
+        target: left_half
+        sound: minecraft:block.anvil.land
+        volume: 1.15
+        pitch: 0.55
+
+  # Optional developer close animation. Remove this later if the boss-key door
+  # should remain permanently open once unlocked.
+  close:
+    reverse-of: open

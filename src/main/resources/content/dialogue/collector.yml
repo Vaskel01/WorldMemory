@@ -1,0 +1,10 @@
+id: collector.first_meeting
+entry: start
+nodes:
+  start:
+    speaker: pale_basin.ash_collector
+    text-key: dialogue.collector.first_meeting.start
+    choices:
+      - id: continue
+        text-key: dialogue.common.continue
+        end: true

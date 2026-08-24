@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.yourstudio'
+version = '0.1.0-alpha.53.1'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Reconstructed repository: unrecovered alpha.36-era engine classes are
+    // preserved in this stripped binary core so the recovered Java sources build.
+    compileOnly files('libs/worldmemory-core-binary.jar')
+}
+
+tasks.named('jar') {
+    archiveBaseName = 'WorldMemory'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(zipTree('libs/worldmemory-core-binary.jar')) {
+        exclude 'META-INF/**'
+    }
+}

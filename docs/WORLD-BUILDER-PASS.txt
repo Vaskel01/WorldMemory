@@ -1,0 +1,3 @@
+WorldMemory 0.1.0-alpha.42 — World Builder/Admin Tooling Pass
+
+Adds /wm builder workspace, selection tools, context inspection, nearby content discovery, goto helpers, and YAML starter generation.

@@ -1,0 +1,21 @@
+id: library.common_memory
+entry: memory_start
+
+# This file is a reusable dialogue library. It can still be played directly for
+# testing, but normally another dialogue imports it under an alias.
+nodes:
+  memory_start:
+    speaker: pale_basin.ash_collector
+    text: "Memory is not a record. It is a wound that learned how to speak."
+    next: memory_detail
+
+  memory_detail:
+    speaker: pale_basin.ash_collector
+    text: "Some wounds remember the hand that made them. Others remember only the shape of the pain."
+    next: memory_end
+
+  memory_end:
+    speaker: narrator
+    text: ""
+    flow:
+      return: true

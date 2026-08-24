@@ -1,0 +1,176 @@
+# ============================================================
+# WorldMemory - Pale Basin Cavern Lift
+# Requires WorldMemory 0.1.0-alpha.29+
+# ============================================================
+
+id: pale_basin.cavern_lift
+enabled: true
+world: ""
+
+state:
+  initial: zero
+
+# ============================================================
+# PLATFORM
+# Original selection:
+#   162 -13 -248
+#   166 -12 -252
+#
+# Normalized bounds:
+#   X 162 -> 166
+#   Y -13 -> -12
+#   Z -252 -> -248
+#
+# The platform rises 31 blocks.
+# Final platform bounds:
+#   Y 18 -> 19
+# Top walking surface at the destination: Y 20
+# ============================================================
+
+targets:
+  lift:
+    type: cuboid
+
+    min:
+      x: 162
+      y: -13
+      z: -252
+
+    max:
+      x: 166
+      y: -12
+      z: -248
+
+    ignore-air: true
+
+    # The lift is sitting in water/vegetation. These are not part
+    # of the moving structure even if they are inside the cuboid.
+    exclude-materials:
+      - WATER
+      - KELP
+      - KELP_PLANT
+      - SEAGRASS
+      - TALL_SEAGRASS
+
+# ============================================================
+# AUTOMATIC ACTIVATION
+#
+# No button or right-click is required. When a player steps onto
+# a solid top-surface block belonging to the lift target, the
+# rise animation starts automatically.
+#
+# one-shot prevents movement/teleport events during the ride from
+# triggering the platform again. /wm animation reset clears it.
+# ============================================================
+
+triggers:
+  platform_sensor:
+    type: stand_on
+    target: lift
+    animation: rise
+    one-shot: true
+
+# ============================================================
+# ANIMATIONS
+# ============================================================
+
+animations:
+
+  rise:
+    steps:
+
+      # Mechanism wakes up before movement.
+      - type: sound
+        target: lift
+        sound: minecraft:block.iron_trapdoor.open
+        volume: 1.05
+        pitch: 0.55
+
+      - type: wait
+        ticks: 8
+
+      - type: sound
+        target: lift
+        sound: minecraft:block.piston.extend
+        volume: 1.00
+        pitch: 0.50
+
+      # ------------------------------------------------------
+      # MAIN LIFT MOVEMENT
+      # ------------------------------------------------------
+      - type: translate
+        target: lift
+
+        offset:
+          x: 0
+          y: 31
+          z: 0
+
+        # 160 ticks = about 8 seconds.
+        duration-ticks: 160
+        easing: ease_in_out
+        renderer: block_display
+
+        # Refuses to start if the platform's solid-block path
+        # would overwrite terrain.
+        prevent-collision: true
+        apply-physics: false
+
+        # Alpha.29 moving-platform support:
+        # players standing on the lift are carried with the
+        # fractional BlockDisplay movement while it rises.
+        carry-players: true
+
+      # Platform becomes real solid blocks again at the top.
+      - type: sound
+        target: lift
+        sound: minecraft:block.anvil.land
+        volume: 1.10
+        pitch: 0.45
+
+      - type: wait
+        ticks: 3
+
+      - type: sound
+        target: lift
+        sound: minecraft:block.chain.place
+        volume: 0.80
+        pitch: 0.60
+
+
+  # Manual developer/test return trip:
+  # /wm animation play pale_basin.cavern_lift descend
+  #
+  # The normal gameplay trigger only sends the platform upward.
+  descend:
+    steps:
+
+      - type: sound
+        target: lift
+        sound: minecraft:block.iron_trapdoor.open
+        volume: 1.00
+        pitch: 0.50
+
+      - type: wait
+        ticks: 8
+
+      - type: translate
+        target: lift
+
+        offset:
+          x: 0
+          y: -31
+          z: 0
+
+        duration-ticks: 160
+        easing: ease_in_out
+        renderer: block_display
+        prevent-collision: true
+        apply-physics: false
+        carry-players: true
+
+      - type: sound
+        target: lift
+        sound: minecraft:block.anvil.land
+        volume: 1.05
+        pitch: 0.45

@@ -1,0 +1,12 @@
+WorldMemory 0.1.0-alpha.43 - Multiplayer & Co-op Reliability Pass
+
+- Revalidates party capacity when invitations are accepted.
+- Invalid /converge accept attempts no longer consume a valid invitation.
+- Prevents pending-invite overwrites/spam for the same guest.
+- Implements the configured host disconnect grace window.
+- Automatically resumes a host session after a quick reconnect.
+- Automatically rejoins briefly disconnected guests when the host session is still healthy.
+- Ends hostless parties safely after grace expiration and re-runs instance unload checks.
+- Owner /converge leave now safely returns guests first.
+- Adds /converge status, /converge kick, /converge disband, and /converge rejoin.
+- Adds optional coop.guest-reconnect-grace-seconds (default 60).

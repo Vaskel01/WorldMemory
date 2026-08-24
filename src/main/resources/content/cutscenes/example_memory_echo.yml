@@ -1,0 +1,12 @@
+id: example.memory_echo
+steps:
+  - type: title
+    title: "A memory stirs."
+    fade-in: 10
+    stay: 20
+    fade-out: 10
+  - type: wait
+    ticks: 20
+  - type: message
+    text: "The world remembers."
+  - type: end

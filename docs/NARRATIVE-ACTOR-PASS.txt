@@ -1,0 +1,30 @@
+WorldMemory 0.1.0-alpha.48 - Dialogue & Actor System
+
+Adds a persistent per-player actor state layer to the alpha.45-47 narrative runtime.
+
+Highlights:
+- actor profiles under content/narrative/actors/
+- relationship axes and actor flags
+- actor-aware dialogue choice conditions
+- choice/node relationship and flag actions
+- persistent emotion and pose state
+- best-effort NPC look-at/pose/emotion cues
+- narrative_event quest signals
+- persistent conversation history
+- %actor:<id>:<key>% interpolation
+- /actor author/debug command surface
+
+Recommended conditional syntax:
+when:
+  actor-condition:
+    actor: pale_basin.ash_collector
+    relationship: trust
+    minimum: 2
+
+Choice action example:
+relationship:
+  add:
+    trust: 1
+actor-flags:
+  reassured: true
+emotion: relieved

@@ -1,0 +1,45 @@
+id: example.composed_session
+entry: start
+
+# Alpha.50 cross-file composition. Imported nodes are exposed as
+# <alias>.<node-id> inside this dialogue.
+imports:
+  - dialogue: library.common_memory
+    as: memory
+
+flow:
+  priority: 20
+  interruptible: true
+
+# Optional shared audience. The owner still controls choices; nearby players
+# receive a mirrored transcript so group scenes can be followed together.
+session:
+  audience-radius: 8
+  mirror-audience: true
+
+nodes:
+  start:
+    speaker: pale_basin.ash_collector
+    text: "There is something you should understand before we continue."
+    choices:
+      - id: listen
+        text: "I'm listening."
+        next: call_memory
+      - id: leave
+        text: "Not now."
+        end: true
+
+  call_memory:
+    speaker: narrator
+    text: ""
+    flow:
+      call: memory.memory_start
+      return-to: after_memory
+
+  after_memory:
+    speaker: pale_basin.ash_collector
+    text: "Now you know enough to recognize what the basin is doing to you."
+    choices:
+      - id: finish
+        text: "I understand."
+        end: true

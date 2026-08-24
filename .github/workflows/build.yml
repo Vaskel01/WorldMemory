@@ -1,0 +1,21 @@
+name: Build WorldMemory
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build reconstructed plugin
+        run: ./build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WorldMemory-alpha53.1
+          path: build/libs/*.jar

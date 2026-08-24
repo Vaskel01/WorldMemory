@@ -1,0 +1,91 @@
+id: example.conversation_flow
+entry: dispatcher
+
+# Alpha.49 flow metadata is optional. Normal alpha.45+ dialogue files still work.
+flow:
+  priority: 10
+  interruptible: true
+
+nodes:
+  # A dispatcher can choose one of several authored nodes without displaying
+  # text itself. Weight is relative. `once` and cooldowns are persistent per
+  # player.
+  dispatcher:
+    speaker: narrator
+    text: ""
+    flow:
+      variants:
+        - id: first_meeting
+          node: greeting_first
+          weight: 4
+          once: true
+        - id: repeat_warm
+          node: greeting_repeat
+          weight: 3
+          cooldown-seconds: 15
+        - id: repeat_short
+          node: greeting_short
+          weight: 1
+      fallback: greeting_short
+
+  greeting_first:
+    speaker: pale_basin.ash_collector
+    text: "So. The Ash finally returns someone to me."
+    choices:
+      - id: ask
+        text: "You were expecting me?"
+        next: call_memory_fragment
+      - id: leave
+        text: "Not now."
+        end: true
+
+  greeting_repeat:
+    speaker: pale_basin.ash_collector
+    text: "You came back sooner than I expected."
+    choices:
+      - id: ask_again
+        text: "Tell me about memory again."
+        next: call_memory_fragment
+      - id: leave
+        text: "Later."
+        end: true
+
+  greeting_short:
+    speaker: pale_basin.ash_collector
+    text: "The basin is listening."
+    choices:
+      - id: continue
+        text: "And what does it hear?"
+        next: call_memory_fragment
+      - id: leave
+        text: "I should go."
+        end: true
+
+  # Local reusable subgraph call. The call node itself is never shown.
+  # When the fragment reaches a `flow.return: true` node, execution returns to
+  # `after_memory_fragment`.
+  call_memory_fragment:
+    speaker: narrator
+    text: ""
+    flow:
+      call: memory_fragment_start
+      return-to: after_memory_fragment
+
+  memory_fragment_start:
+    speaker: pale_basin.ash_collector
+    text: "Memory is not a record. It is a wound that learned how to speak."
+    next: memory_fragment_end
+
+  memory_fragment_end:
+    speaker: narrator
+    text: ""
+    flow:
+      return: true
+
+  after_memory_fragment:
+    speaker: pale_basin.ash_collector
+    text: "That is enough for now."
+    choices:
+      - id: finish
+        text: "I understand."
+        end: true

@@ -1,0 +1,6 @@
+WorldMemory 0.1.0-alpha.37 - Animation Stability Pass
+
+- Retains Paper 26.2 compatibility hotfixes from alpha.36 hotfix3.
+- Stand-on trigger checks now skip PlayerMoveEvent packets that do not cross a block boundary.
+- Collision failures log the exact blocking coordinate, phase (path/destination), and material.
+- Collision behavior itself remains conservative and unchanged.

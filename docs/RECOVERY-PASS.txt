@@ -1,0 +1,9 @@
+WorldMemory 0.1.0-alpha.40 — Persistence & Crash Recovery Pass
+
+- Dirty shutdown session marker
+- Atomic in-flight animation operation journals
+- Startup rollback of interrupted translations
+- WorldMemory-owned BlockDisplay tagging and orphan cleanup
+- Stable animation checkpoints for offsets and one-shot trigger state
+- /wm recovery status|scan|repair [animation-id]
+- Preserves alpha.37 Paper 26.2 compatibility fixes and alpha.39 safe reload tooling

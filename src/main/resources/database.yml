@@ -1,0 +1,16 @@
+# Set this to false while world-building/testing without a database.
+# In that mode, WorldMemory keeps temporary state only in RAM and all progress resets on server restart.
+enabled: false
+
+# Only applies when enabled: true. If true, PostgreSQL connection/migration failures stop the plugin.
+# If false, WorldMemory falls back to temporary in-memory mode instead.
+required: true
+
+host: "127.0.0.1"
+port: 5432
+database: "worldmemory"
+username: "worldmemory"
+password: "change-me"
+sslmode: "prefer"
+max-pool-size: 8
+connection-timeout-ms: 5000

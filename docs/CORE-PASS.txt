@@ -1,0 +1,10 @@
+WorldMemory 0.1.0-alpha.38 - Core Operations Pass
+
+Changes:
+- Added /wm doctor for plugin-wide runtime diagnostics.
+- /wm status now includes animation runtime counters.
+- Added /wm animation debug <definition-id> for deeper definition/runtime inspection.
+- Added doctor/debug to command help and tab completion.
+- Preserves alpha.37 Paper 26.2 compatibility and animation stability fixes.
+
+No gameplay, collision, movement, persistence schema, or content behavior was intentionally changed.

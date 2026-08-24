@@ -1,0 +1,68 @@
+# WorldMemory Animation Core example (alpha.26)
+# Disabled by default. Copy/rename this file and fill in real coordinates/materials.
+
+id: example.smooth_gate
+enabled: false
+world: ""
+
+# For hide-at-end mechanisms, zero is the safest development startup state.
+state:
+  initial: zero
+
+targets:
+  gate:
+    type: cuboid
+    min:
+      x: 0
+      y: 0
+      z: 0
+    max:
+      x: 0
+      y: 0
+      z: 0
+    ignore-air: true
+
+    # Optional. Strongly recommended when walls/terrain share this cuboid.
+    # Supports wildcards such as DARK_OAK_* or *_FENCE.
+    include-materials: []
+    exclude-materials: []
+
+triggers:
+  main_lever:
+    type: lever
+    location:
+      x: 0
+      y: 0
+      z: 0
+    powered-animation: open
+    unpowered-animation: close
+    delay-ticks: 1
+    cancel-vanilla: false
+
+animations:
+  open:
+    steps:
+      - type: sound
+        target: gate
+        sound: minecraft:block.piston.contract
+        volume: 1.0
+        pitch: 0.65
+
+      - type: translate
+        target: gate
+        offset:
+          x: 0
+          y: 8
+          z: 0
+        duration-ticks: 50
+        easing: ease_in_out
+        renderer: block_display
+        prevent-collision: true
+        apply-physics: false
+
+        # The gate visually retracts into the wall/arch, but no real blocks are
+        # placed there. reverse-of will materialize it back at its home position.
+        hide-at-end: true
+
+  close:
+    reverse-of: open

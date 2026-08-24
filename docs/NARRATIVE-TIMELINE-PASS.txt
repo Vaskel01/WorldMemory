@@ -1,0 +1,16 @@
+WorldMemory 0.1.0-alpha.47 — Narrative Timeline & Cinematic Editor
+
+Adds:
+- /cinematic timeline inspection and preview from any step.
+- Persistent per-builder camera markers and look-at YAML generation.
+- In-game cinematic draft recorder with safe create/backup-on-force export.
+- Custom blocking cutscene steps: player-move, look-at, npc-move, npc-look, fade.
+- Letterbox presentation hook for resource-pack/HUD integrations (safe no-op by default).
+- Existing NarrativeCore remains the owner of story/dialogue/cutscene execution.
+
+Notes:
+- True cinematic letterboxing is not possible with a vanilla server API alone. Alpha.47 exposes
+  command-on/command-off hooks under content/narrative/presentation.yml so a resource-pack/HUD
+  layer can render it later without changing authored cutscenes.
+- NPC movement uses Bukkit entity teleports and is best for scripted blocking; plugins that own
+  NPC navigation may need their navigator paused during the shot.

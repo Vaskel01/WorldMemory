@@ -1,0 +1,16 @@
+WorldMemory 0.1.0-alpha.39 - Content Integrity & Safe Reload Pass
+
+Changes:
+- /wm validate performs a dry-run using temporary content and animation loaders.
+- /wm content validate is now non-destructive.
+- /wm reload [scope] and /wm content reload [scope] preflight before commit.
+- /wm reload --check validates without changing live registry/runtime state.
+- Safe reload scopes: all, content, animations, zones, anchors, gates, quests, or a zone id.
+- /wm animation reload now preflights before clearing animation runtime state.
+- Content manifest version is checked against content.required-content-version.
+- Content backups are created before committed content reloads.
+- Failed preflight leaves live state untouched; commit failures restore the previous registry snapshot.
+- /wm inspect <id> can inspect live animations, zones, anchors, and legacy gates.
+- /wm doctor now includes schema/content-version health.
+
+Preserves alpha.37 Paper 26.2 compatibility fixes and alpha.38 operational diagnostics.

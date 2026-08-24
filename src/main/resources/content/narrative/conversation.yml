@@ -1,0 +1,11 @@
+# WorldMemory alpha.50 conversation-flow settings.
+# Ambient barks are intentionally conservative and never interrupt an active
+# dialogue session.
+ambient:
+  interval-ticks: 60
+
+# Dialogue-level session policy lives in each dialogue file:
+# flow.priority: 0
+# flow.interruptible: true
+# session.audience-radius: 0
+# session.mirror-audience: false

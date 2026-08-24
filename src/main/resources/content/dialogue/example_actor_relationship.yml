@@ -1,0 +1,53 @@
+id: example.actor_relationship
+entry: greeting
+nodes:
+  greeting:
+    speaker: pale_basin.ash_collector
+    text: "You return. I remember our trust at %actor:pale_basin.ash_collector:trust%."
+    emotion: wary
+    look-at-player: true
+    event: example.collector_greeting
+    choices:
+      - id: reassure
+        text: "You can trust me."
+        relationship:
+          add:
+            trust: 1
+            affinity: 0.5
+        actor-flags:
+          reassured: true
+        emotion: relieved
+        event: example.collector_reassured
+        next: trusted
+
+      - id: ask_secret
+        text: "Tell me what you know."
+        when:
+          actor-condition:
+            actor: pale_basin.ash_collector
+            relationship: trust
+            minimum: 2
+        next: secret
+
+      - id: leave
+        text: "Not now."
+        end: true
+
+  trusted:
+    speaker: pale_basin.ash_collector
+    text: "Perhaps memory can be earned after all."
+    choices:
+      - id: continue
+        text: "Continue."
+        end: true
+
+  secret:
+    speaker: pale_basin.ash_collector
+    text: "Very well. The Tribunal did not fall by accident."
+    actor-flags-on-enter:
+      heard_tribunal_secret: true
+    emotion: neutral
+    choices:
+      - id: continue
+        text: "I understand."
+        end: true

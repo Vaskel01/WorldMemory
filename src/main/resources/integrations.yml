@@ -1,0 +1,10 @@
+required:
+  WorldEdit: true
+  WorldGuard: true
+  Citizens: true
+optional:
+  MythicMobs: true
+  PlaceholderAPI: true
+  LuckPerms: true
+  ProtocolLib: false
+  BetonQuest: false

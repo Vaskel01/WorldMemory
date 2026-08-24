@@ -1,0 +1,20 @@
+id: example.memory_scene
+entry: intro
+scenes:
+  intro:
+    steps:
+      - type: title
+        title: "WorldMemory"
+        subtitle: "Narrative core online"
+        fade-in: 10
+        stay: 30
+        fade-out: 10
+      - type: wait
+        ticks: 10
+      - type: dialogue
+        id: collector.first_meeting
+      - type: set
+        variable: met_collector
+        value: true
+      - type: checkpoint
+      - type: end

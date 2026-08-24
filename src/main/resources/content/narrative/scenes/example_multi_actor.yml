@@ -1,0 +1,56 @@
+id: example.multi_actor_scene
+
+audience:
+  radius: 12
+  owner-only: false
+
+cast:
+  collector: pale_basin.ash_collector
+  echo: pale_basin.memory_echo
+
+steps:
+  - type: line
+    speaker: collector
+    text: "You hear it too, then."
+    duration-ticks: 45
+
+  - type: actor-look
+    target: collector
+    look-at: player
+    duration-ticks: 12
+
+  - type: line
+    speaker: echo
+    text: "Not hearing. Remembering."
+    duration-ticks: 50
+
+  # Camera beats are synchronized to every nearby scene participant.
+  # Replace these example coordinates with your own markers/positions.
+  - type: sync-camera
+    action: enter
+    x: 0.5
+    y: 75.0
+    z: 0.5
+    yaw: 20
+    pitch: 8
+    duration-ticks: 0
+
+  - type: sync-camera
+    action: move
+    x: 6.5
+    y: 72.0
+    z: -8.5
+    yaw: 45
+    pitch: 5
+    duration-ticks: 60
+    easing: smooth
+
+  - type: line
+    speaker: collector
+    text: "Then we should be careful what we ask the basin to remember."
+    duration-ticks: 65
+
+  - type: sync-camera
+    action: exit
+
+  - type: end

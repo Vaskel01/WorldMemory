@@ -1,0 +1,20 @@
+WorldMemory 0.1.0-alpha.52 — Narrative Authoring Experience
+
+Adds a unified /studio authoring workspace without changing the alpha.51 narrative runtime model.
+
+Key tools:
+- /studio new <type> <id>
+- /studio duplicate <type> <source-id> <new-id>
+- /studio where <id>
+- /studio refs <id>
+- /studio find <text>
+- /studio outline <id>
+- /studio recent [count]
+- /studio index
+- /studio validate
+- /studio reload
+- /studio play|inspect|timeline|graph <id>
+- /studio backup
+
+Supported authoring definition types:
+dialogue, story, cutscene, scene, actor, speaker, quest

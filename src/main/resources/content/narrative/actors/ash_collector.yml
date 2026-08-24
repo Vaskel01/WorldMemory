@@ -1,0 +1,50 @@
+id: pale_basin.ash_collector
+display-name: "Ash Collector"
+aliases:
+  - "Ash Collector"
+  - "ash_collector"
+
+relationships:
+  trust: 0
+  respect: 0
+  fear: 0
+  affinity: 0
+
+state:
+  default-emotion: neutral
+  default-pose: standing
+
+presentation:
+  look-at-player: true
+
+# Emotion cues are optional and best-effort. They never control story logic.
+cues:
+  wary:
+    pose: standing
+    sound: minecraft:block.amethyst_block.chime
+    volume: 0.25
+    pitch: 0.7
+  relieved:
+    pose: standing
+    sound: minecraft:block.amethyst_block.chime
+    volume: 0.25
+    pitch: 1.15
+
+
+# Optional non-blocking proximity barks. Disabled by default so alpha.49 does
+# not change existing scenes until the author opts in.
+ambient:
+  enabled: false
+  radius: 8
+  cooldown-seconds: 45
+  chance: 0.25
+  priority: 10
+  lines:
+    - id: ash_stirs
+      text: "The Ash is restless today."
+      weight: 3
+      cooldown-seconds: 60
+    - id: basin_listens
+      text: "Careful. The basin listens when footsteps repeat."
+      weight: 1
+      once: true

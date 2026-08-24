@@ -1,0 +1,45 @@
+id: example.timeline_editor
+
+# Alpha.47 demonstrates the new director-only cinematic steps.
+# NPC targets can match entity names/custom names or scoreboard tags.
+steps:
+  - type: camera
+    action: enter
+    x: 0.5
+    y: 74.0
+    z: 0.5
+    yaw: 0
+    pitch: 10
+    duration-ticks: 0
+
+  - type: fade
+    mode: in
+    duration-ticks: 10
+
+  - type: npc-look
+    target: Ash Collector
+    look-x: 0.5
+    look-y: 65.5
+    look-z: 6.5
+    duration-ticks: 12
+
+  - type: camera
+    action: move
+    x: 4.5
+    y: 71.0
+    z: -8.5
+    yaw: 28
+    pitch: 7
+    duration-ticks: 60
+    easing: smooth
+
+  - type: dialogue
+    id: collector.first_meeting
+
+  - type: wait
+    ticks: 10
+
+  - type: camera
+    action: exit
+
+  - type: end

@@ -1,0 +1,206 @@
+id: pale_basin.procession_bridge
+zone: pale_basin
+type: temporary_structure
+origin:
+  x: 120
+  y: 64
+  z: -40
+requirements:
+  route: route_a
+  minimum-chapter: 2
+cost:
+  ash: 25
+  saturation: 4
+schematics:
+  recalled: pale_basin/procession_bridge_recalled.schem
+  ruined: pale_basin/procession_bridge_ruined.schem
+# Recall air behavior is controlled globally by config.yml -> recall.ignore-air (default true).
+# Temporary rollback uses the pre-Recall world snapshot when recall.safe-restore is true.
+# The ruined schematic remains only as a fallback when safe restoration is disabled/unavailable.
+# Recalled structures can reconstruct in different authored patterns.
+# animation: instant | bottom_up | top_down | radial | wave | random_ash
+reconstruction:
+  animation: bottom_up
+  blocks-per-tick: 96
+  interval-ticks: 1
+  # Particles follow newly materialized blocks as the recalled structure reconstructs.
+  # Existing world blocks do not emit per-block Recall particles.
+  # style: memory_ash | soul | spark | portal | ash | none
+  particles:
+    enabled: true
+    style: memory_ash
+    every-blocks: 8
+    count: 1
+    spread: 0.15
+    speed: 0.01
+    start-burst: 24
+    finish-burst: 48
+
+    # Fired across the recalled structure when its duration expires, just before
+    # safe restoration returns the terrain to its pre-Recall state.
+    disappear-burst: 72
+
+  # Recall soundscape. Trail chimes are synchronized with reconstruction particle
+  # pulses, while the completion sound plays with the final particle burst.
+  sounds:
+    enabled: true
+    start:
+      sound: minecraft:block.respawn_anchor.charge
+      volume: 0.65
+      pitch: 1.15
+    trail:
+      sound: minecraft:block.amethyst_block.chime
+      # Play one trail chime every N particle pulses to avoid audio spam on large builds.
+      every-pulses: 2
+      volume: 0.28
+      pitch: 1.55
+      pitch-variation: 0.12
+    finish:
+      sound: minecraft:block.beacon.activate
+      volume: 0.90
+      pitch: 1.25
+
+    # Played at the moment the recalled memory collapses/disappears.
+    disappear:
+      sound: minecraft:block.respawn_anchor.deplete
+      volume: 0.85
+      pitch: 1.15
+duration: 30s
+activation:
+  guests-allowed: true
+  host-confirmation: false
+logging-tags: [traversal, optional_safe_route]
+
+# Physical Ash Anchor interaction hitbox. This is separate from the schematic
+# origin above. Set center to the block coordinates of the Anchor build.
+interaction:
+  enabled: false
+  mode: menu # direct | menu
+
+  world: "" # blank = any world
+  center:
+    x: 120
+    y: 64
+    z: -40
+  radius:
+    x: 2
+    y: 3
+    z: 2
+  cancel-vanilla: true
+  cooldown-ms: 30000
+
+  # alpha.23: the complete chest UI is authored here.
+  # Color codes use &: &5 purple, &d pink, &7 gray, &l bold, etc.
+  # Useful placeholders:
+  # {player} {anchor_id} {anchor_name} {zone}
+  # {ash_cost} {saturation_cost} {duration} {cooldown}
+  # {cooldown_remaining} {animation} {resonance} {ash_offering} {error}
+  menu:
+    anchor-name: "Procession Bridge"
+    title: "&5Ash Anchor &8• &f{anchor_name}"
+
+    # 27-slot chest. The outer rim is filled automatically.
+    activate-slot: 12
+    info-slot: 14
+
+    filler:
+      material: BLACK_STAINED_GLASS_PANE
+      name: "&0 "
+      lore: []
+      glint: false
+      hide-tooltip: true
+
+    activate-item:
+      # Optional common material for both ready/cooldown states.
+      material: ECHO_SHARD
+
+      ready:
+        name: "&d&lRecall the Memory"
+        glint: true
+        lore:
+          - "&8A memory waits beyond the veil."
+          - ""
+          - "&7Reach into the fractured past and"
+          - "&7restore what this place remembers."
+          - ""
+          - "&7Offering  {ash_offering}"
+          - "&7Manifestation  &f{duration}"
+          - ""
+          - "&a&lREADY TO RECALL"
+          - "&8Click to awaken the Anchor."
+
+      cooldown:
+        name: "&5&lMemory Resonating"
+        glint: false
+        lore:
+          - "&8A memory still lingers in the Anchor."
+          - ""
+          - "&7The previous Recall has not yet faded."
+          - ""
+          - "&7Offering  {ash_offering}"
+          - "&7Manifestation  &f{duration}"
+          - ""
+          - "&c&lANCHOR RESONATING"
+          - "&8Ready in {cooldown_remaining}."
+
+    info-item:
+      material: CLOCK
+      name: "&b&lAnchor Memory"
+      glint: false
+      lore:
+        - "&8The Anchor remembers what the world forgot."
+        - ""
+        - "&7Memory  &f{anchor_name}"
+        - "&7Zone  &f{zone}"
+        - "&7Ash Cost  &d{ash_cost}"
+        - "&7Saturation  &b{saturation_cost}"
+        - "&7Recall Time  &f{duration}"
+        - "&7Cooldown  &f{cooldown}"
+        - "&7Pattern  &f{animation}"
+        - ""
+        - "&7Resonance  {resonance}"
+        - ""
+        - "&8Right-click the physical Anchor to return here."
+
+  # Every physical-Anchor chat message can now be changed per Anchor.
+  # Set a message to "" to silence it.
+  messages:
+    not-found: "&cThe Anchor's memory cannot be found."
+    menu-open-failed: "&cThe Anchor refuses to answer right now."
+    cooldown: "&5The Ash Anchor is still resonating. &7{cooldown_remaining} remain."
+    pending: "&5The Anchor is already reaching into this memory..."
+    activating: "&5You reach into the Anchor's fractured memory..."
+    success: "&dThe memory answers. &f{anchor_name} &7has been recalled."
+    failure: "&cThe Anchor could not recall this memory. &7{error}"
+
+  # These are the UI/interaction sounds, separate from reconstruction sounds.
+  # Set sound: "" to disable an individual cue.
+  sounds:
+    open:
+      sound: minecraft:block.respawn_anchor.charge
+      volume: 0.45
+      pitch: 0.72
+    info:
+      sound: minecraft:block.amethyst_block.chime
+      volume: 0.35
+      pitch: 1.65
+    cooldown:
+      sound: minecraft:block.respawn_anchor.deplete
+      volume: 0.35
+      pitch: 0.70
+    pending:
+      sound: minecraft:block.amethyst_block.chime
+      volume: 0.25
+      pitch: 0.75
+    activating:
+      sound: minecraft:block.respawn_anchor.charge
+      volume: 0.55
+      pitch: 0.78
+    success:
+      sound: minecraft:block.respawn_anchor.set_spawn
+      volume: 0.72
+      pitch: 0.86
+    failure:
+      sound: minecraft:block.respawn_anchor.deplete
+      volume: 0.45
+      pitch: 0.72

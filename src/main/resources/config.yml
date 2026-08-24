@@ -1,0 +1,87 @@
+server-id: "paper-26-2-main"
+production-mode: false
+
+# Gameplay feature modules. Disable systems you are not testing yet.
+# The default development profile below is Recall-only.
+modules:
+  instances: false
+  ash: false
+  recall: true
+  remnants: false
+  coop: false
+  # Quest/progression runtime (alpha.41).
+  quests: true
+  # Unified dialogue, story and cutscene runtime (alpha.45).
+  narrative: true
+  # Generic world animation engine. If missing, legacy modules.gates is used as the fallback.
+  animations: true
+  # Backwards-compatibility adapter for alpha.24 content/gates/*.yml.
+  gates: true
+
+# Narrative core defaults. Alpha.45 uses these as documented authoring defaults;
+# renderer-specific switches will be wired into later presentation passes.
+narrative:
+  default-locale: "en_us"
+  auto-npc-dialogue: true
+  clickable-choices: true
+  save-checkpoints: true
+
+# Recall/Ash Anchor test behavior. These options make Recall usable directly
+# in your current Bukkit world without entering a WorldMemory instance.
+animations:
+  # Maximum solid blocks that may become BlockDisplay entities for one smooth translate.
+  # Larger targets automatically fall back to the rigid block-step renderer.
+  max-display-blocks: 512
+
+recall:
+  require-instance: false
+  enforce-story-requirements: false
+  charge-ash: false
+  persist-anchor-state: false
+  # Schematic air is transparent during Recall and will never erase existing world blocks.
+  # Keep this true for normal Recall behavior (equivalent to WorldEdit //paste -a).
+  ignore-air: true
+  # Safe temporary Recall restoration. Before Recall starts, WorldMemory captures
+  # the original block states only where the recalled schematic can place blocks.
+  # On expiry it restores that snapshot instead of pasting schematic air over terrain.
+  safe-restore: true
+  # Allow physical Ash Anchors to activate when a player right-clicks any block
+  # inside the interaction hitbox authored in that Anchor YAML.
+  right-click-anchors: true
+  # Master switch for all Recall reconstruction particles.
+  particles-enabled: true
+  # Master switch for the Recall soundscape. Per-anchor sounds can also be disabled.
+  sounds-enabled: true
+  disappear-effects-enabled: true
+
+instances:
+  lobby-world: "world"
+  default-template-id: "route_a"
+  default-template-version: 1
+  unload-delay-seconds: 90
+  template-root: "templates"
+  world-prefix: "wm_"
+
+ash:
+  starting-ash: 0
+  starting-capacity: 100
+  death-loss-percent: 25
+
+remnants:
+  enabled: true
+  default-message-key: "remnant.message.default"
+  share-previous-on-death: true
+
+coop:
+  invite-timeout-seconds: 60
+  host-disconnect-grace-seconds: 30
+  # Guests who briefly disconnect can automatically rejoin the same host session.
+  guest-reconnect-grace-seconds: 60
+  max-party-size: 4
+
+content:
+  required-content-version: "1.0.0"
+  template-version: 1
+
+logging:
+  verbose-bootstrap: true

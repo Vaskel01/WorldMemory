@@ -1,0 +1,14 @@
+renderer:
+  native-dialogs: true
+  subtitles: true
+  choice-numbers: true
+  dialog-width: 360
+  choice-columns: 1
+
+# Alpha.47 cinematic presentation hooks.
+# True letterbox bars require a client/resource-pack presentation layer, so the
+# core exposes command hooks instead of pretending vanilla can draw them.
+cinematic:
+  letterbox:
+    command-on: ""
+    command-off: ""

@@ -1,0 +1,12 @@
+id: pale_basin.ash_collector
+scope: instance
+platform:
+  citizens-type: PLAYER
+  skin-key: ash_collector
+spawn:
+  zone: pale_basin
+  location-id: collector_default
+state-default: alive
+faction: sanctuary
+reaction-profile: remnant_researcher
+dialogue-entry: collector.first_meeting

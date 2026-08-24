@@ -1,0 +1,47 @@
+# WorldMemory animated gate example.
+# This system is completely separate from Recall.
+
+id: pale_basin.main_gate
+enabled: false
+
+# Leave blank to allow this gate in any world, or set the Bukkit world name.
+world: ""
+
+# Exact block coordinates of the lever that controls this gate.
+lever:
+  x: 0
+  y: 0
+  z: 0
+
+# Tight cuboid containing ONLY the gate while it is CLOSED.
+# Air is ignored, but any solid wall/floor blocks inside this cuboid will move too.
+gate:
+  min:
+    x: 0
+    y: 0
+    z: 0
+  max:
+    x: 0
+    y: 0
+    z: 0
+
+movement:
+  # Gate rises this many blocks when the lever is powered.
+  distance: 8
+
+  # Delay between each one-block vertical movement.
+  # 1 = very fast, 2-3 = heavy gate feel, 4+ = slow.
+  interval-ticks: 2
+
+  # Lever OFF lowers the gate again.
+  close-on-unpower: true
+
+  # lever = infer current state from the lever after server startup.
+  # Also accepts: open, closed
+  initial-state: lever
+
+  # Refuse to overwrite terrain in the gate's path.
+  prevent-collision: true
+
+  # Keep false for decorative gates so fences/trapdoors/etc. do not break from physics.
+  apply-physics: false

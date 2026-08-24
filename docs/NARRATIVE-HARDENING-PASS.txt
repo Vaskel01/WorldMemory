@@ -1,0 +1,29 @@
+WorldMemory 0.1.0-alpha.53 — Narrative Production Hardening
+
+Hardening is layered on top of the alpha.52 Narrative Studio authoring pass.
+
+Runtime protections:
+- dialogue render-loop guard (80 node renders / 5 seconds)
+- stalled story/cutscene/scene watchdog warnings
+- offline narrative-session cleanup after a 60-second grace window
+- orphan cinematic-camera detection and repair
+- narrative runtime-state schema marker and automatic pre-schema backup
+
+Diagnostics:
+- /nguard status
+- /nguard doctor
+- /nguard repair
+- /nguard backup
+
+Safe reload:
+- /nguard reload
+- /studio reload automatically routes through the hardening safe reload
+- refuses reload while dialogue/story/cutscene/scene runtime is active
+- YAML syntax preflight
+- duplicate-ID preflight
+- authored-content backup
+- in-memory static collection snapshot
+- reload + validation
+- rollback to previous in-memory definitions when the reload reports hard errors
+
+Static hardening checks also flag automatic no-choice dialogue cycles and story scene-chain cycles.

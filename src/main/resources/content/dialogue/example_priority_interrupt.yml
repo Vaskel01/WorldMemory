@@ -1,0 +1,18 @@
+id: example.priority_interrupt
+entry: warning
+
+# Higher-priority dialogue can pause a lower-priority interruptible dialogue.
+# When this conversation ends, alpha.50 resumes the paused dialogue at the node
+# where it was interrupted.
+flow:
+  priority: 100
+  interruptible: false
+
+nodes:
+  warning:
+    speaker: narrator
+    text: "Something in the world demands your attention."
+    choices:
+      - id: acknowledge
+        text: "Continue."
+        end: true

@@ -1,0 +1,11 @@
+id: pale_basin
+name-key: zone.pale_basin
+worldguard-regions:
+  - wm_pale_basin
+ambience: pale_basin_stable
+remnant-pool: pale_basin_general
+connections:
+  - sanctuary_to_borough
+  - basin_to_archive
+state-default: stable
+allowed-routes: [route_a, route_c, final]

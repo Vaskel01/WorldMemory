@@ -1,0 +1,45 @@
+WorldMemory 0.1.0-alpha.45 — Narrative Core
+
+Goal
+----
+Unify dialogue, story scenes, cutscenes, quest signals, animations, localization and checkpoints behind one server-side narrative runtime. The architecture is inspired by narrative authoring tools such as NarrativeCraft, while remaining a Paper plugin and keeping WorldMemory's YAML content-pack workflow.
+
+Commands
+--------
+/narrative help
+/narrative status [player]
+/narrative choose <number>
+/narrative resume [player]
+/narrative stop [player]
+/narrative vars [player]
+/narrative list [all|dialogues|stories|cutscenes|npcs]
+/narrative inspect <id>
+/narrative validate
+/narrative reload
+/narrative play dialogue|story|cutscene <id> [player]
+/narrative camera here [duration-ticks]
+/narrative template dialogue|story|cutscene <id>
+
+Story step types
+----------------
+message/text, dialogue, cutscene, wait, animation, title, sound, command, quest-signal, set/set-var, add/add-var, goto/scene, if/branch, camera, checkpoint, end
+
+Cutscene step types
+-------------------
+wait, message/text, title, sound, command, dialogue, animation, quest-signal, camera, end
+
+Camera
+------
+Camera steps support enter/move/exit, x/y/z/yaw/pitch, duration-ticks and smooth or linear easing. WorldMemory restores the player's prior location and movement/game-mode state when the cinematic ends. Use /narrative camera here to generate a keyframe from your current position.
+
+Persistence
+-----------
+Story checkpoints are written atomically per player under plugins/WorldMemory/narrative/saves/. A disconnected player can resume a saved story with /narrative resume.
+
+NPC dialogue
+------------
+Existing NPC definitions can use dialogue-entry. PlayerInteractEntityEvent resolves WorldMemory/Citizens-style NPC identity and starts that dialogue automatically.
+
+Notes
+-----
+Alpha.45 is the narrative runtime foundation. It uses chat/clickable choices and server-driven spectator camera movement. A later presentation pass can add Paper-native Dialog API rendering and richer editor UX without changing the story graph.

@@ -1,0 +1,25 @@
+id: example.directed_scene
+steps:
+  - type: camera
+    action: enter
+    x: 0.5
+    y: 75.0
+    z: 0.5
+    yaw: 0
+    pitch: 10
+  - type: camera
+    action: move
+    x: 8.5
+    y: 72.0
+    z: -10.5
+    yaw: 35
+    pitch: 8
+    duration-ticks: 80
+    easing: smooth
+  - type: dialogue
+    id: collector.first_meeting
+  - type: wait
+    ticks: 10
+  - type: camera
+    action: exit
+  - type: end

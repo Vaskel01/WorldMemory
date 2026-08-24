@@ -1,0 +1,8 @@
+WorldMemory 0.1.0-alpha.44 — Performance & Scalability Pass
+
+- PlayerMoveEvent quest bridge now runs only after crossing into a different block.
+- Cached spatial index for coordinate-based animation triggers (lever/button/right_click/redstone/etc.).
+- Stand-on trigger scans prefilter animation definitions by world and trigger type.
+- 1-second bounded block-level WorldGuard region cache for quest enter_zone checks.
+- /wm perf [status|reset] runtime counters and cache visibility.
+- Existing Paper 26.2 compatibility, recovery, content integrity, quest, builder, and co-op behavior preserved.

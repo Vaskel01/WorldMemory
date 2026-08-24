@@ -1,0 +1,7 @@
+id: pale_basin.ash_collector
+display-name: "Ash Collector"
+subtitle-prefix: ""
+voice:
+  sound: minecraft:block.amethyst_block.chime
+  volume: 0.35
+  pitch: 0.7

@@ -1,0 +1,18 @@
+id: route_a.first_procession
+scope: owner
+route: route_a
+stages:
+  meet_collector:
+    objectives:
+      - id: talk_collector
+        type: talk_to_npc
+        target: pale_basin.ash_collector
+    next-stage: cross_bridge
+  cross_bridge:
+    objectives:
+      - id: activate_bridge
+        type: activate_anchor
+        target: pale_basin.procession_bridge
+      - id: reach_road
+        type: enter_zone
+        target: pale_basin.meridian_road

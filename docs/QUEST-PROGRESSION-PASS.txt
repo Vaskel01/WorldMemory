@@ -1,0 +1,11 @@
+WorldMemory 0.1.0-alpha.41 — Quest & Progression Pass
+
+- Real quest runtime for content/quests/*.yml
+- Owner-scoped co-op progression
+- PostgreSQL persistence through existing quests / quest_objectives tables
+- Memory-mode fallback remains temporary by design
+- Automatic talk_to_npc, activate_anchor, and WorldGuard enter_zone signals
+- Player quest journal and progression admin commands
+- Quest content validation and hot definition refresh
+- Objective/stage/quest completion feedback
+- Existing alpha.40 recovery and Paper 26.2 animation compatibility preserved

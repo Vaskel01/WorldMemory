@@ -1,0 +1,101 @@
+name: WorldMemory
+version: 0.1.0-alpha.53.1
+main: com.yourstudio.worldmemory.WorldMemoryPlugin
+api-version: '26.2'
+description: Instanced narrative action-adventure game engine based on the WorldMemory production specification.
+authors: [YourStudio]
+load: POSTWORLD
+softdepend:
+  - WorldEdit
+  - WorldGuard
+  - Citizens
+  - MythicMobs
+  - PlaceholderAPI
+  - LuckPerms
+  - ProtocolLib
+  - BetonQuest
+libraries:
+  - org.postgresql:postgresql:42.7.13
+commands:
+  worldmemory:
+    aliases: [wm]
+    description: WorldMemory player and administration command.
+    usage: /wm help
+    permission: worldmemory.play
+  converge:
+    description: WorldMemory Convergence co-op command.
+    usage: /converge help
+    permission: worldmemory.coop.use
+  narrative:
+    aliases: [story, wmn]
+    description: WorldMemory narrative runtime and authoring command.
+    usage: /narrative help
+    permission: worldmemory.play
+  cinematic:
+    aliases: [cine, cutscene]
+    description: WorldMemory cinematic timeline editor and preview command.
+    usage: /cinematic help
+    permission: worldmemory.admin
+  actor:
+    aliases: [wmactor, character]
+    description: WorldMemory narrative actor state, relationships, and dialogue history.
+    usage: /actor help
+    permission: worldmemory.play
+  conversation:
+    aliases: [convo, wmconversation]
+    description: WorldMemory dialogue graph, flow state, and ambient conversation tools.
+    usage: /conversation help
+    permission: worldmemory.play
+  scene:
+    aliases: [stage, wmscene]
+    description: WorldMemory multi-character staged scene director and runtime.
+    usage: /scene help
+    permission: worldmemory.narrative.admin
+  studio:
+    aliases: [wmstudio, storystudio]
+    description: Unified WorldMemory narrative authoring workspace.
+    usage: /studio help
+    permission: worldmemory.narrative.admin
+  narrativeguard:
+    aliases: [nguard, storyguard]
+    description: Narrative runtime hardening, diagnostics, repair, and safe reload.
+    usage: /nguard help
+    permission: worldmemory.narrative.admin
+permissions:
+  worldmemory.play:
+    default: true
+  worldmemory.instance.enter:
+    default: true
+  worldmemory.coop.use:
+    default: true
+  worldmemory.coop.invite:
+    default: true
+  worldmemory.settings:
+    default: true
+  worldmemory.remnant.messages:
+    default: true
+  worldmemory.admin:
+    default: op
+    children:
+      worldmemory.admin.player: true
+      worldmemory.admin.instance: true
+      worldmemory.admin.progression: true
+      worldmemory.admin.remnant: true
+      worldmemory.narrative.admin: true
+  worldmemory.admin.player:
+    default: op
+  worldmemory.admin.instance:
+    default: op
+  worldmemory.admin.progression:
+    default: op
+  worldmemory.admin.remnant:
+    default: op
+  worldmemory.builder:
+    default: op
+  worldmemory.devtools:
+    default: op
+  worldmemory.content.reload:
+    default: op
+
+  worldmemory.narrative.admin:
+    default: op

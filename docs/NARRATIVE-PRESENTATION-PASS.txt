@@ -1,0 +1,32 @@
+WorldMemory 0.1.0-alpha.46 — Narrative Presentation & Cinematic Editor
+
+Adds a presentation adapter on top of alpha.45's narrative runtime.
+
+Presentation
+------------
+- Paper 26.2 native Dialog API renderer for dialogue choices when available.
+- Alpha.45 clickable chat remains the automatic fallback.
+- Speaker profiles under content/narrative/speakers/.
+- Per-speaker display names, subtitle prefixes and voice cue sounds.
+- Dialogue subtitle/title presentation on node changes.
+- Native dialogue buttons feed directly into /narrative choose <n>.
+- Skip / Close button maps to the existing safe /narrative stop path.
+
+Configuration
+-------------
+content/narrative/presentation.yml
+  renderer.native-dialogs
+  renderer.subtitles
+  renderer.choice-numbers
+  renderer.dialog-width
+  renderer.choice-columns
+
+Cinematic authoring
+-------------------
+The existing /narrative camera here [duration-ticks] remains the primary keyframe capture tool.
+An additional directed-scene example demonstrates camera enter/move/exit around blocking dialogue.
+
+Architecture
+------------
+NarrativePresentation is deliberately a renderer adapter. NarrativeCore still owns story graphs,
+variables, saves, dialogue choice state, cutscene sequencing, quests and animations.
